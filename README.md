@@ -1,9 +1,19 @@
 # XGBoost Library Performance Experiment
-This repository contains a brief experiment evaluating the performance of v1 and v2 versions of the XGBoost.jl library. It was inspired by the discussion in the XGBoost.jl library's (issue #160)[https://github.com/dmlc/XGBoost.jl/issues/160] and aims to address concerns about instability in version 2 that hinder its use for learning to rank tasks. The objective is to clear up any confusion on this matter and improve XGBoost for the benefit of the community.
+This repository contains a brief experiment evaluating the performance of v1 and v2 versions of the XGBoost.jl library. It was inspired by the discussion in the XGBoost.jl library's [issue #160](https://github.com/dmlc/XGBoost.jl/issues/160) and aims to address concerns about instability in version 2 that hinder its use for learning to rank tasks. The objective is to clear up any confusion on this matter and improve XGBoost for the benefit of the community.
 
 ## Introduction 
 
 While updating the XGBoost library, I noticed a decrease in performance compared to previous versions. After conducting an investigation, I discovered one possible cause of this issue. My suspicion is that the scores generated for documents during prediction time are inconsistent after training. The experiment results show that this inconsistency occurs when the order between train and test data is changed and this does not happen with version 1 of the library. Additionally, a detailed chart of scores indicates a clear degradation in comparison to previous versions. The exact internal cause is unclear, but version 2 appears to be unstable for ranking tasks.
+
+**Health Ranking Result**  
+It is expected that as the model generates higher or lower scores, the distinction between relevant and irrelevant documents will become more accurate.
+
+![image](https://user-images.githubusercontent.com/4332052/217380172-b85b4647-0d48-4f5a-836d-2d16acd5f877.png)
+
+**Situation of Ranking Result v2**  
+Depending on the order of prediction, the results of scores may exhibit mixed results in ranking, as shown in the figure below.
+
+![image](https://user-images.githubusercontent.com/4332052/217380197-195ecd4a-c7cd-4648-91b3-dbd677a98476.png)
 
 ## Dependencies
 - None, except XGBoost that will be installed for the test 
