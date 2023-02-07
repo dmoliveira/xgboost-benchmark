@@ -13,7 +13,7 @@ function getdata(filename::String; rows::Int=-1)::Tuple{SparseMatrixCSC, Vector{
         row = split(rawrow, " ")
         push!(ys, parse(Float32, row[1]))
         push!(qids, parse(Int, last(split(row[2], ":"))))
-        for f in row[3:end-1]
+        for f in row[3:end]
             j, v = split(f, ":")
             push!(I, i)
             push!(J, parse(Int, j))
